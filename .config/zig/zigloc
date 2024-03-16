@@ -1,0 +1,1 @@
+export PATH="$PATH:$lang_dir$current_nightly_name"
