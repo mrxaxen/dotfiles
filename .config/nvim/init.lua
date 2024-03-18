@@ -129,15 +129,28 @@ local plugins = {
             lsp_zero.extend_cmp()
 
             local cmp = require("cmp")
-            local cmp_action = lsp_zero.cmp_action()
 
             cmp.setup({
                 formatting = lsp_zero.cmp_format({ details = true }),
                 mapping = cmp.mapping.preset.insert({
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
                     ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<C-n>"] = cmp_action.luasnip_jump_forward(),
-                    ["<C-p>"] = cmp_action.luasnip_jump_backward(),
+                    --["<C-n>"] = cmp.select_next_item({behavior = "select"}),
+                    --["<C-p>"] = cmp.select_prev_item({behavior = "select"}),
+                    ["<C-n"] = cmp.mapping(function ()
+                        if cmp.visible then
+                            cmp.select_next_item({ behavior = "select" })
+                        else
+                            cmp.complete()
+                        end
+                    end),
+                    ["<C-p"] = cmp.mapping(function ()
+                        if cmp.visible then
+                            cmp.select_prev_item({ behavior = "select" })
+                        else
+                            cmp.complete()
+                        end
+                    end),
                     ["<C-u>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-d>"] = cmp.mapping.scroll_docs(4),
                 }),
@@ -163,6 +176,7 @@ local plugins = {
 
             vim.lsp.set_log_level("debug")
             mason_lspconfig.setup({
+                ensure_installed = { "bashls", "jdtls", "lua_ls", "pylsp", "tsserver", "zls" },
                 handlers = {
                     lsp_zero.default_setup,
                     jdtls = function()

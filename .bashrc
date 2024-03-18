@@ -126,5 +126,6 @@ alias bfg='java -jar '
 
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
-xrandr --output eDP-1 --brightness 0.65
-xrandr --output HDMI-1-1 --brightness 0.70
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
