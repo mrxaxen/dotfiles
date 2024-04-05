@@ -61,7 +61,7 @@ local plugins = {
 
             harpoon:setup()
 
-            vim.keymap.set("n", "ä", function() harpoon:list():append() end)
+            vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end)
             vim.keymap.set("n", "<C-h>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
             vim.keymap.set("n", "<C-j>", function() harpoon:list():select(1) end)
             vim.keymap.set("n", "<C-k>", function() harpoon:list():select(2) end)
@@ -70,7 +70,7 @@ local plugins = {
             vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
             vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
         end
-    },
+        },
     {
         "nvim-telescope/telescope.nvim",
         tag = "0.1.6",
@@ -97,7 +97,17 @@ local plugins = {
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
+        build = { ":TSUpdate" },
+        config = {
+            ensure_installed = {
+                'lua', 'vim', 'vimdoc', 'c', 'java', 'go', 'zig', 'python', 'javascript'
+            },
+            auto_install = true,
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = false,
+            },
+        },
     },
     --    "nvim-treesitter/playground", -- syntax tree
     {
@@ -176,7 +186,7 @@ local plugins = {
 
             vim.lsp.set_log_level("debug")
             mason_lspconfig.setup({
-                ensure_installed = { "bashls", "jdtls", "lua_ls", "pylsp", "tsserver", "zls" },
+                ensure_installed = { "bashls", "jdtls", "lua_ls", "tsserver", "zls" },
                 handlers = {
                     lsp_zero.default_setup,
                     jdtls = function()
@@ -235,16 +245,17 @@ local plugins = {
                     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
                     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
                     vim.keymap.set('n', '<C-S-k>', vim.lsp.buf.signature_help, opts)
-                    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-                    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
-                    vim.keymap.set('n', '<space>wl', function()
+                    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+                    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+                    vim.keymap.set('n', '<leader>wl', function()
                         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
                     end, opts)
-                    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-                    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-                    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+                    vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+                    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+                    vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, opts)
+                    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
                     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-                    vim.keymap.set('n', '<space>f', function()
+                    vim.keymap.set('n', '<leader>f', function()
                         vim.lsp.buf.format { async = true }
                     end, opts)
                 end,

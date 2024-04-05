@@ -26,4 +26,10 @@ ros2_colb_pkg() {
 	source install/setup.bash
 }
 
+ros2_clean() {
+    rm -r ./build
+    rm -r ./install
+    rm -r ./log
+}
+
 echo "Workspace initialized for ROS2 Foxy"

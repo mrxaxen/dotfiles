@@ -15,7 +15,6 @@ then
     mkdir lang_dir
 fi
 
-# Download nightly
 if [[ $webcontent =~ $distro_url_regex ]]
 then
     download_url="${BASH_REMATCH[1]}"
@@ -26,11 +25,12 @@ then
         then
             if [[ ! -f "$download_dir/$current_nightly_name.tar.xz" ]]
             then
+                echo 'Zig nightly check: Downloading new nightly build..'
                 wget -q -P $download_dir $download_url
             fi
             rm -rf $lang_dir/zig*
             tar -xf "${download_dir}/${current_nightly_name}.tar.xz" -C $lang_dir
-            echo 'export PATH="$PATH:$lang_dir/$current_nightly_name"' > $ziglocfile
+            echo "export PATH=\"$PATH:$lang_dir/$current_nightly_name\"" > $ziglocfile
             rm -f ${download_dir}${current_nightly_name}
         else
             echo "Zig nightly check: Already up to date."
