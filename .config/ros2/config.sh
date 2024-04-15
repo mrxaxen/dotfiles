@@ -20,6 +20,10 @@ ros2_colb() {
 	source install/setup.bash
 }
 
+ros2_source() {
+	source install/setup.bash
+}
+
 ros2_colb_pkg() {
 	rosdep install -i --from-path src --rosdistro foxy -y
 	colcon build --symlink-install --packages-up-to $1
