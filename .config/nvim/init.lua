@@ -81,6 +81,13 @@ local plugins = {
             local builtin = require("telescope.builtin")
             vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
             vim.keymap.set("n", "<leader>gf", builtin.git_files, {})
+
+            local telescope = require('telescope')
+            telescope.setup{
+                pickers = {
+                    find_files = { hidden = true }
+                }
+            }
         end
     },
     {
@@ -144,7 +151,7 @@ local plugins = {
                 formatting = lsp_zero.cmp_format({ details = true }),
                 mapping = cmp.mapping.preset.insert({
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                    ["<C-Space>"] = cmp.mapping.complete(),
+                    ["<C-B>"] = cmp.mapping.complete(),
                     --["<C-n>"] = cmp.select_next_item({behavior = "select"}),
                     --["<C-p>"] = cmp.select_prev_item({behavior = "select"}),
                     ["<C-n"] = cmp.mapping(function ()
