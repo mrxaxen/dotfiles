@@ -79,15 +79,10 @@ local plugins = {
         },
         config = function ()
             local builtin = require("telescope.builtin")
-            vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-            vim.keymap.set("n", "<leader>gf", builtin.git_files, {})
 
-            local telescope = require('telescope')
-            telescope.setup{
-                pickers = {
-                    find_files = { hidden = true }
-                }
-            }
+            vim.keymap.set("n", "<leader>ff", function() builtin.find_files() end, {})
+            vim.keymap.set("n", "<leader>fa", function() builtin.find_files({ hidden=true, no_ignore=true, no_ignore_parent=true }) end, {})
+            vim.keymap.set("n", "<leader>gf", builtin.git_files, {})
         end
     },
     {
@@ -249,6 +244,7 @@ local plugins = {
                     local opts = { buffer = ev.buf }
                     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
                     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+                    -- vim.keymap.set('n', '<leader>T', vim.lsp.buf.typehierarchy, opts)
                     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
                     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
                     vim.keymap.set('n', '<C-S-k>', vim.lsp.buf.signature_help, opts)

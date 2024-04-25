@@ -117,19 +117,15 @@ if ! shopt -oq posix; then
 fi
 
 # monitor brightness: gddccontrol
-# Custom configs:
-
-source ~/.config/ros2/config.sh
-source ~/.config/zig/config.sh
-
-alias bfg='java -jar '
-
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Custom configs:
+source ~/.config/ros2/config.sh
+source ~/.config/zig/config.sh
+source ~/.config/java/config.sh
+source ~/.config/nvm/config.sh
+source ~/.config/nvim/config.sh
+source ~/.config/git/config.sh
 
-alias rosdep='rosdep --rosdistro=humble'
 setxkbmap us
 # setxkbmap hu
