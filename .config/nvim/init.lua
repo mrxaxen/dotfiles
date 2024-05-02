@@ -247,10 +247,13 @@ local plugins = {
                                         },
                                         pyflakes = {
                                             enabled = false,
-                                        }
+                                        },
+                                        jedi_completion = {
+                                            enabled = false,
+                                        },
                                     }
                                 }
-                            }
+                            },
                         })
                     end,
                     basedpyright = function ()
@@ -258,7 +261,10 @@ local plugins = {
                             capabities = capabilities,
                             settings = {
                                 basedpyright = {
-                                    typeCheckingMode = "standard",
+                                    analysis = {
+                                        diagnosticMode = "workspace",
+                                        typeCheckingMode = "standard",
+                                    },
                                 },
                             },
                         })

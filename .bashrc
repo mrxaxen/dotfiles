@@ -118,13 +118,23 @@ fi
 
 # monitor brightness: gddccontrol
 # Custom configs:
-# source ~/.config/ros2/config.sh
+
+# Poetry
+export PATH="/home/xaxen/.local/bin:$PATH"
+echo "Poetry initialized for the workspace."
+
+init_ros() {
+    source ~/.config/ros2/config.sh
+}
+
 source ~/.config/nvidia/config.sh
 # source ~/.config/zig/config.sh # TODO: Fix nightly, it messes up the PATH if fails(old path in zigloc)
 source ~/.config/java/config.sh
 source ~/.config/nvm/config.sh
 source ~/.config/nvim/config.sh
 source ~/.config/git/config.sh
+source ~/.config/Postman/config.sh
 
 setxkbmap us
 # setxkbmap hu
+# sudo prime-select nvidia

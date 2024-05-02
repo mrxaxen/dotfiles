@@ -1,7 +1,3 @@
-# Poetry
-export PATH="/home/xaxen/.local/bin:$PATH"
-echo "Poetry initialized for the workspace."
-
 # ROS2
 source /opt/ros/humble/setup.bash
 source /usr/share/colcon_cd/function/colcon_cd.sh
