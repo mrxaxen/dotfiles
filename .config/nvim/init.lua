@@ -43,7 +43,7 @@ local plugins = {
             --vim.cmd("colorscheme tokyonight-moon")
         end
     },
-    { "folke/neoconf.nvim",               cmd = "Neoconf" },
+    { "folke/neoconf.nvim", cmd = "Neoconf" },
     "folke/neodev.nvim",
     {
         "folke/trouble.nvim",
@@ -61,7 +61,7 @@ local plugins = {
 
             harpoon:setup()
 
-            vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end)
+            vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end)
             vim.keymap.set("n", "<C-h>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
             vim.keymap.set("n", "<C-j>", function() harpoon:list():select(1) end)
             vim.keymap.set("n", "<C-k>", function() harpoon:list():select(2) end)
@@ -188,7 +188,9 @@ local plugins = {
 
             vim.lsp.set_log_level("debug")
             mason_lspconfig.setup({
-                ensure_installed = { "bashls", "jdtls", "lua_ls", "tsserver", "zls" },
+                ensure_installed = {
+                    "bashls", "jdtls", "lua_ls", "tsserver", "zls", "basedpyright", "pylsp"
+                },
                 handlers = {
                     lsp_zero.default_setup,
                     jdtls = function()
@@ -201,7 +203,7 @@ local plugins = {
                                             "build.xml"
                                         },
                                         { upward = true })[1])
-                                    or vim.cmd("pwd") 
+                                    or vim.cmd("pwd")
                             end
                         })
                     end,
@@ -230,6 +232,37 @@ local plugins = {
                             end
                         })
                     end,
+                    pylsp = function ()
+                        lspconfig.pylsp.setup({
+                            settings = {
+                                pylsp = {
+                                    plugins = {
+                                        pycodestyle = {
+                                            enabled = false,
+                                            maxLineLength = 100
+                                        },
+                                        flake8 = {
+                                            enabled = true,
+                                            maxLineLength = 100
+                                        },
+                                        pyflakes = {
+                                            enabled = false,
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                    end,
+                    basedpyright = function ()
+                        lspconfig.basedpyright.setup({
+                            capabities = capabilities,
+                            settings = {
+                                basedpyright = {
+                                    typeCheckingMode = "standard",
+                                },
+                            },
+                        })
+                    end,
                 }
             })
 
@@ -244,9 +277,10 @@ local plugins = {
                     local opts = { buffer = ev.buf }
                     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
                     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-                    -- vim.keymap.set('n', '<leader>T', vim.lsp.buf.typehierarchy, opts)
-                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+                    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
                     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+                    -- vim.keymap.set('n', '<leader>th', vim.lsp.buf.typehierarchy, opts)
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
                     vim.keymap.set('n', '<C-S-k>', vim.lsp.buf.signature_help, opts)
                     vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
                     vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
@@ -257,11 +291,19 @@ local plugins = {
                     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
                     vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, opts)
                     vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
-                    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
                     vim.keymap.set('n', '<leader>f', function()
                         vim.lsp.buf.format { async = true }
                     end, opts)
                 end,
+            })
+        end
+    },
+    {
+        "rshkarin/mason-nvim-lint",
+        dependencies = { "mfussenegger/nvim-lint" },
+        config = function ()
+            require("mason-nvim-lint").setup({
+                ensure_installed = { "mypy" }
             })
         end
     },

@@ -117,11 +117,10 @@ if ! shopt -oq posix; then
 fi
 
 # monitor brightness: gddccontrol
-export PATH="$PATH:/opt/nvim-linux64/bin"
-
 # Custom configs:
-source ~/.config/ros2/config.sh
-source ~/.config/zig/config.sh
+# source ~/.config/ros2/config.sh
+source ~/.config/nvidia/config.sh
+# source ~/.config/zig/config.sh # TODO: Fix nightly, it messes up the PATH if fails(old path in zigloc)
 source ~/.config/java/config.sh
 source ~/.config/nvm/config.sh
 source ~/.config/nvim/config.sh
