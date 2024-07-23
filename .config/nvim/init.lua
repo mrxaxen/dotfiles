@@ -1,6 +1,7 @@
 require("xaxen.sets")
 require("xaxen.remap")
 require("xaxen.color")
+require("xaxen.autocmd")
 
 vim.loader.enable()
 local version = vim.version
