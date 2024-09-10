@@ -50,8 +50,18 @@ local plugins = {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function ()
-            vim.keymap.set("n", "<leader>t", vim.cmd.TroubleToggle)
+            vim.keymap.set("n", "<leader>tt", vim.cmd.TroubleToggle)
+            vim.keymap.set("n", "<leader>tc", function() vim.cmd.TroubleToggle {"todo"} end)
         end
+    },
+    {
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+        }
     },
     {
         "ThePrimeagen/harpoon",
@@ -187,7 +197,7 @@ local plugins = {
 
             local mason_lspconfig = require("mason-lspconfig")
 
-            vim.lsp.set_log_level("debug")
+            vim.lsp.set_log_level("info")
             mason_lspconfig.setup({
                 ensure_installed = {
                     "bashls", "jdtls", "lua_ls", "tsserver", "zls", "basedpyright", "pylsp"
