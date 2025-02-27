@@ -1,5 +1,10 @@
 vim.g.mapleader = " "
 
+-- Negate bullshit
+vim.keymap.set("n", "<leader>t", "<Nop>")
+--vim.keymap.set("n", "<leader>tt", "<Nop>")
+--vim.keymap.set("n", "<leader>tc", "<Nop>")
+
 -- Move block in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -11,16 +16,16 @@ vim.keymap.set("n", "n", "nzzzv") -- keep search terms in the middle
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- paste without copying the overwritten term(highlighted term, void reg.)
-vim.keymap.set("x", "<leader>p", "\"_dP")
+vim.keymap.set("x", "<leader>p", '"_dP')
 
 -- + register == system clipboard -> copy to system clipboard
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("n", "<leader>y", '"+y')
+vim.keymap.set("v", "<leader>y", '"+y')
+vim.keymap.set("n", "<leader>Y", '"+Y')
 
 -- del to void register like above
-vim.keymap.set("n", "<leader>d", "\"_d")
-vim.keymap.set("v", "<leader>d", "\"_d")
+vim.keymap.set("n", "<leader>d", '"_d')
+vim.keymap.set("v", "<leader>d", '"_d')
 
 -- Q is a bad place
 vim.keymap.set("n", "Q", "<nop>")
@@ -28,7 +33,9 @@ vim.keymap.set("n", "Q", "<nop>")
 -- TODO: install tmux
 -- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- Format file
-vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end)
+vim.keymap.set("n", "<leader>f", function()
+	vim.lsp.buf.format()
+end)
 
 -- quickfix list nav.
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")

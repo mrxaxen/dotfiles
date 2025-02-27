@@ -7,8 +7,8 @@ lang_dir=~/langs
 zig_conf_dir=~/.config/zig
 ziglocfile=$zig_conf_dir/zigloc
 
-package_name_regex="(zig-linux-x86_64-0\.12\.0-dev\.[0-9a-z\+]+)\.tar\.xz"
-distro_url_regex="<a href=(https:\/\/ziglang.org\/builds\/zig-linux-x86_64-0\.12\.0-dev\.[0-9a-z\+]+\.tar\.xz)>"
+package_name_regex="(zig-linux-x86_64-0\.[0-9]{2}\.[0-9]-dev\.[0-9a-z\+]+)\.tar\.xz"
+distro_url_regex="<a href=\"(https:\/\/ziglang.org\/builds\/zig-linux-x86_64-0\.[0-9]{2}\.[0-9]-dev\.[0-9a-z\+]+\.tar\.xz)\">"
 
 if [[ ! -d $zig_conf_dir ]]
 then
