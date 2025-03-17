@@ -6,10 +6,8 @@ return {
 		{ "williamboman/mason-lspconfig.nvim", config = function() end },
 	},
 	opts = function()
-		---@class PluginLspOpts
 		local ret = {
 			-- options for vim.diagnostic.config()
-			---@type vim.diagnostic.Opts
 			diagnostics = {
 				underline = true,
 				update_in_insert = false,
@@ -61,8 +59,8 @@ return {
 				timeout_ms = nil,
 			},
 			-- LSP Server Settings
-			---@type lspconfig.options
 			servers = {
+				jdtls = {},
 				lua_ls = {
 					-- mason = false, -- set to false if you don't want this server to be installed with mason
 					-- Use this to add any additional keymaps
@@ -131,8 +129,22 @@ return {
 			},
 			-- you can do any additional lsp server setup here
 			-- return true if you don't want this server to be setup with lspconfig
-			---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
 			setup = {
+				jdtls = function()
+					-- Your nvim-java configuration goes here
+					require("java").setup({
+						-- root_markers = {
+						--   "settings.gradle",
+						--   "settings.gradle.kts",
+						--   "pom.xml",
+						--   "build.gradle",
+						--   "mvnw",
+						--   "gradlew",
+						--   "build.gradle",
+						--   "build.gradle.kts",
+						-- },
+					})
+				end,
 				-- example to setup with typescript.nvim
 				-- tsserver = function(_, opts)
 				--   require("typescript").setup({ server = opts })
@@ -144,7 +156,6 @@ return {
 		}
 		return ret
 	end,
-	---@param opts PluginLspOpts
 	config = function(_, opts)
 		-- setup autoformat
 		LazyVim.format.register(LazyVim.lsp.formatter())
