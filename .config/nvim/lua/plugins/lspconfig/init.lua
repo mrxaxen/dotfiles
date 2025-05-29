@@ -133,6 +133,17 @@ return {
 				jdtls = function()
 					-- Your nvim-java configuration goes here
 					require("java").setup({
+						jdk = {
+							auto_install = false,
+							version = "21.0.2",
+						},
+						lombok = {
+							version = "nightly",
+						},
+						spring_boot_tools = {
+							enable = true,
+							version = "1.55.1",
+						},
 						-- root_markers = {
 						--   "settings.gradle",
 						--   "settings.gradle.kts",
